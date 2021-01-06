@@ -32,8 +32,8 @@ namespace ClientUDP
                 Task.Run(() => ReceiveMessage());
                 while (true)
                 {
-                    Console.ReadKey();
-                    GetInfo();
+                    if(Console.ReadKey().Key == ConsoleKey.Enter)
+                        GetInfo();
                 }
             }
             catch (Exception ex){Console.WriteLine(ex.Message);}
@@ -115,6 +115,8 @@ namespace ClientUDP
 
         private static void GetInfo()
         {
+            Console.WriteLine($"\nНачало расчетов...");
+
             SortedDictionary<long, long> classes 
                 = new SortedDictionary<long, long>(NumClasses);
 
@@ -158,6 +160,7 @@ namespace ClientUDP
             q = q / (total_count - 1);
             q = Math.Sqrt(q);
 
+            Console.WriteLine();
             Console.WriteLine($"Медиана: {median}");
             Console.WriteLine($"Мода: {ave_pair.Key}");
             Console.WriteLine($"Среднее отклонение от условной средней: {b}");
