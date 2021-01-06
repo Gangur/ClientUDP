@@ -80,7 +80,7 @@ namespace ClientUDP
                         }
                         else
                             if (!NumClasses.TryAdd(key, 1))
-                            LostPackages++;
+                                LostPackages++;
                     }
                     else
                     {
@@ -88,8 +88,8 @@ namespace ClientUDP
                     }
 
                     // Имитация потерь
-                    if(random.Next(0,1000) == 13)
-                        Thread.Sleep(100);
+                    //if(random.Next(0,1000) == 13)
+                    //    Thread.Sleep(100);
                 }
             }
             catch (Exception ex) { Console.WriteLine(ex.Message); }
@@ -115,9 +115,8 @@ namespace ClientUDP
 
         private static void GetInfo()
         {
-            SortedDictionary<long, long> classes = new SortedDictionary<long, long>();
-            foreach (KeyValuePair<long, long> pair in NumClasses)
-                classes.Add(pair.Key, pair.Value);
+            SortedDictionary<long, long> classes 
+                = new SortedDictionary<long, long>(NumClasses);
 
             long total_count = 0; //Всего пакетов
             var ave_pair = new KeyValuePair<long, long>(); //условная средняя / Мода
